@@ -4,7 +4,7 @@ pipeline {
     stage('Checkout') {
       steps {
         sh 'echo "Checkout successful"'
-        //git branch: 'main', url: 'https://github.com/Doom710/hosting_test'
+        //git branch: 'main', url: 'https://github.com/asifps-cloud/hosting_test.git'
       }
     }
 

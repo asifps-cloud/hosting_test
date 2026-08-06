@@ -44,18 +44,18 @@ pipeline {
       }
     }
 
-    stage('Update Deployment File') {
+   stage('Update Deployment File') {
         environment {
             GIT_REPO_NAME = "hosting_test"
             GIT_USER_NAME = "asifps-cloud"
         }
         steps {
-            withCredentials([string(credentialsId: 'github', variable: 'GITHUB_TOKEN')]) {
+            withCredentials([usernamePassword(credentialsId: 'github', usernameVariable: 'GIT_USER', passwordVariable: 'GITHUB_TOKEN')]) {
                 sh '''
                     git config user.email "asifdua7@gmail.com"
                     git config user.name "${GIT_USER_NAME}"
                     
-                    sed -i "s|image: .*|image: asifpsdocker/static-website:${BUILD_NUMBER}|g" k8s/deployment.yml
+                    sed -i "s|image: .*|image: asifdocker/static-website:${BUILD_NUMBER}|g" k8s/deployment.yml
                     
                     git add k8s/deployment.yml
                     git commit -m "Update static site image tag to ${BUILD_NUMBER} [skip ci]" || echo "No changes to commit"
@@ -64,5 +64,4 @@ pipeline {
             }
         }
     }
-  }
 }

@@ -24,7 +24,7 @@ pipeline {
       steps {
         script {
             def scannerHome = tool 'SonarScanner'
-            withSonarQubeEnv('sonarqube') {
+            withSonarQubeEnv('SonarQube') {
                 sh "${scannerHome}/bin/sonar-scanner -Dsonar.projectKey=my-ec2-project -Dsonar.sources=src/"
             }
         }
